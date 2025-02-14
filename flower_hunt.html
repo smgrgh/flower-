@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flower Hunt for Aditi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fff7f1;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .question {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+        input {
+            padding: 10px;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌸 Flower Hunt for Aditi 🌸</h1>
+        <p class="question" id="question-text">Loading...</p>
+        <input type="text" id="answer" placeholder="Type your answer...">
+        <button onclick="checkAnswer()">Submit</button>
+        <p class="result hidden" id="result-text"></p>
+        <img id="flower-image" class="hidden" width="200px">
+    </div>
+    <script>
+        const questions = [
+            { clue: "I turn towards the light, just like my heart turns towards you. Bright and radiant, I stand tall.", answer: "sunflower", image: "https://example.com/sunflower.jpg" },
+            { clue: "I bloom in the harshest conditions, yet I remain the most elegant in the garden. Graceful, yet strong—just like you.", answer: "rose", image: "https://example.com/rose.jpg" },
+            { clue: "I come in many colors, but the rarest one, the blue one, is as unique as you.", answer: "orchid", image: "https://example.com/orchid.jpg" },
+            { clue: "Though I’m small, I symbolize eternal love. You can find me in fields, quietly reminding the world—‘Don’t forget me’.", answer: "forget-me-not", image: "https://example.com/forget-me-not.jpg" }
+        ];
+        let currentQuestion = 0;
+        
+        function loadQuestion() {
+            if (currentQuestion < questions.length) {
+                document.getElementById("question-text").innerText = questions[currentQuestion].clue;
+                document.getElementById("answer").value = "";
+                document.getElementById("result-text").classList.add("hidden");
+                document.getElementById("flower-image").classList.add("hidden");
+            } else {
+                document.querySelector(".container").innerHTML = `<h2>You've completed the hunt! 💖</h2><p>You are my garden of happiness, my bouquet of love. Each flower in this hunt reminds me of you—your warmth, strength, uniqueness, and the eternal love we share.</p><p><img src='https://example.com/final.jpg' width='200px'></p><p>Love you, Taaru! 🌸💖</p>`;
+            }
+        }
+        
+        function checkAnswer() {
+            const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
+            if (userAnswer === questions[currentQuestion].answer) {
+                document.getElementById("result-text").innerText = "Correct! 💖";
+                document.getElementById("result-text").classList.remove("hidden");
+                document.getElementById("flower-image").src = questions[currentQuestion].image;
+                document.getElementById("flower-image").classList.remove("hidden");
+                currentQuestion++;
+                setTimeout(loadQuestion, 2000);
+            } else {
+                document.getElementById("result-text").innerText = "Try again, my love! ✨";
+                document.getElementById("result-text").classList.remove("hidden");
+            }
+        }
+        
+        loadQuestion();
+    </script>
+</body>
+</html>
